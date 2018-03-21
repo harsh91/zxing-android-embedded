@@ -89,7 +89,7 @@ public class IntentIntegrator {
 
     private Class<?> captureActivity;
 
-    private int requestCode = REQUEST_CODE;
+    private static int requestCode = REQUEST_CODE;
 
     protected Class<?> getDefaultCaptureActivity() {
         return CaptureActivity.class;
@@ -128,7 +128,7 @@ public class IntentIntegrator {
         if (requestCode <= 0 || requestCode > 0x0000ffff) {
             throw new IllegalArgumentException("requestCode out of range");
         }
-        this.requestCode = requestCode;
+        IntentIntegrator.requestCode = requestCode;
         return this;
     }
 
@@ -343,7 +343,7 @@ public class IntentIntegrator {
      * the fields will be null.
      */
     public static IntentResult parseActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == this.requestCode) {
+        if (requestCode == IntentIntegrator.requestCode) {
             return parseActivityResult(resultCode, intent);
         }
         return null;
